@@ -29,8 +29,3 @@ Config.Text = {
     Distance = 3.5
 }
 
--- don't forget vector3()
-Config.TextLocations = {
-    vector3(319.20547485352,-588.57763671875,43.284042358398)
-    --vector3(x,y,z)
-}
