@@ -21,11 +21,22 @@ ESX.RegisterServerCallback('patino_hospital:checkEMS', function(source, cb, emsR
     local xPlayers = ESX.GetPlayers()
     local emsConnected = 0
     local emsRequired = Config.EMSRequired
+    
 
-    for i=1, #xPlayers, 1 do
-        local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
-        if xPlayer.job.name == Config.EMSJobName then
-            emsConnected = emsConnected + 1
+    if Config.UsingESXLegacy then
+        local xPlayers = ESX.GetExtendedPlayers('job', Config.EMSJobName)
+        for _, xPlayer in pairs(xPlayers) do
+            if xPlayer.job.name == Config.EMSJobName then
+                emsConnected = emsConnected + 1
+            end
+        end
+    else
+        local xPlayers = ESX.GetPlayers()
+        for i=1, #xPlayers, 1 do
+            local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
+            if xPlayer.job.name == Config.EMSJobName then
+                emsConnected = emsConnected + 1
+            end
         end
     end
 
