@@ -3,7 +3,7 @@ game 'gta5'
 
 author 'mauriziopatino'
 description 'mauriziopatino hospital'
-version '1.0.1'
+version '1.0.2'
 
 shared_scripts {
     'config.lua',
