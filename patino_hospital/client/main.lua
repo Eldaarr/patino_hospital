@@ -65,37 +65,43 @@ Citizen.CreateThread(function()
                 letSleep = false
                 DrawText3D(v.x, v.y, v.z, Locales[Config.Language]['press_to_heal'])
                 if IsControlJustReleased(0, 38) then
+                    ESX.TriggerServerCallback('patino_hospital:checkEMS', function(emsRequired)
+                        if not emsRequired then
+                        
+                            if IsEntityDead(playerPed) then
+                            
+                                ESX.TriggerServerCallback('patino_hospital:canPay', function(canPay)
+                                    if canPay then
+                                        if Config.UseRprogress then
+                                            exports.rprogress:Custom({
+                                                Duration = 10000,
+                                                Label = "Doctor is checking you...",
+                                                DisableControls = {
+                                                    Mouse = false,
+                                                    Player = true,
+                                                    Vehicle = true
+                                                }
+                                            })
+                                            Citizen.Wait(10000)
+                                            TriggerEvent('esx_ambulancejob:revive')
+                                            ESX.ShowNotification(Locales[Config.Language]['successfully_paid'])
+                                        else
+                                            TriggerEvent('esx_ambulancejob:revive')
+                                            ESX.ShowNotification(Locales[Config.Language]['successfully_paid'])
+                                        end
+                                    else
+                                        ESX.ShowNotification(Locales[Config.Language]['not_enough_money'])
+                                    end
 
-                    if IsEntityDead(playerPed) then
-                    
-                        ESX.TriggerServerCallback('patino_hospital:canPay', function(canPay)
-                            if canPay then
-                                if Config.UseRprogress then
-                                    exports.rprogress:Custom({
-                                        Duration = 10000,
-                                        Label = "Doctor is checking you...",
-                                        DisableControls = {
-                                            Mouse = false,
-                                            Player = true,
-                                            Vehicle = true
-                                        }
-                                    })
-                                    Citizen.Wait(10000)
-                                    TriggerEvent('esx_ambulancejob:revive')
-                                    ESX.ShowNotification(Locales[Config.Language]['successfully_paid'])
-                                else
-                                    TriggerEvent('esx_ambulancejob:revive')
-                                    ESX.ShowNotification(Locales[Config.Language]['successfully_paid'])
-                                end
+                                end, price)
+
                             else
-                                ESX.ShowNotification(Locales[Config.Language]['not_enough_money'])
+                                ESX.ShowNotification(Locales[Config.Language]['player_is_not_dead'])
                             end
-
-                        end, price)
-
-                    else
-                        ESX.ShowNotification(Locales[Config.Language]['player_is_not_dead'])
-                    end
+                        else
+                            ESX.ShowNotification(Locales[Config.Language]['enough_ems'])
+                        end
+                    end, ems)
                 end
             end
         end

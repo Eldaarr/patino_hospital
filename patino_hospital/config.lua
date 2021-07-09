@@ -4,9 +4,11 @@ Config = {}
 ------------------------------------------ GENERAL STUFF ---------------------------------------------
 ------------------------------------------------------------------------------------------------------ 
 Config.Language = 'en'
-Config.UsingESXLegacy = true -- If you are not using ESX Legacy, set this to true and comment: '@es_extended/imports.lua' in fxmanifest.lua
+Config.UsingESXLegacy = true -- If you are using ESX Legacy, set this to true and uncomment: '@es_extended/imports.lua' in fxmanifest.lua
 Config.ReviveInvoice = 1500
 Config.UseRprogress = true -- Disable if you want to revive instantly https://forum.cfx.re/t/release-standalone-rprogress-customisable-radial-progress-bars/1630655
+Config.EMSJobName = 'ambulance'
+Config.EMSRequired = 3
 
 ------------------------------------------------------------------------------------------------------
 -------------------------------------------- PED STUFF -----------------------------------------------
