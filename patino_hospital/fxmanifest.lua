@@ -8,7 +8,7 @@ version '1.0.2'
 shared_scripts {
     'config.lua',
     'locales/locales.lua',
-    '@es_extended/imports.lua'
+    --'@es_extended/imports.lua'
 }
 
 client_scripts {
