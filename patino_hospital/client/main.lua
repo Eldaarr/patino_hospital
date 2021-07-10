@@ -17,8 +17,8 @@ end)
 -- Creating the ped function
 function createNpc()
 
-    RequestModel(GetHashKey("s_m_m_doctor_01"))
-    while (not HasModelLoaded(GetHashKey("s_m_m_doctor_01"))) do
+    RequestModel(GetHashKey(Config.RequestModel))
+    while (not HasModelLoaded(GetHashKey(Config.RequestModel))) do
         Citizen.Wait(1)
     end
 
