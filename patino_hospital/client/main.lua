@@ -75,7 +75,7 @@ Citizen.CreateThread(function()
                                         if Config.UseRprogress then
                                             exports.rprogress:Custom({
                                                 Duration = 10000,
-                                                Label = "Doctor is checking you...",
+                                                Label = Locales[Config.Language]['doctor_checking_you'],
                                                 DisableControls = {
                                                     Mouse = false,
                                                     Player = true,
@@ -96,7 +96,35 @@ Citizen.CreateThread(function()
                                 end, price)
 
                             else
-                                ESX.ShowNotification(Locales[Config.Language]['player_is_not_dead'])
+                                if Config.HealPlayer then
+                                    ESX.TriggerServerCallback('patino_hospital:canPay', function(canPay)
+                                        if canPay then
+                                            if Config.UseRprogress then
+                                                exports.rprogress:Custom({
+                                                    Duration = 10000,
+                                                    Label = Locales[Config.Language]['doctor_checking_you'],
+                                                    DisableControls = {
+                                                        Mouse = false,
+                                                        Player = true,
+                                                        Vehicle = true
+                                                    }
+                                                })
+                                                Citizen.Wait(10000)
+                                                SetEntityHealth(playerPed, 200)
+                                                ESX.ShowNotification(Locales[Config.Language]['successfully_paid'])
+                                            else
+                                                SetEntityHealth(playerPed, 200)
+                                                ESX.ShowNotification(Locales[Config.Language]['successfully_paid'])
+                                            end
+                                        else
+                                            ESX.ShowNotification(Locales[Config.Language]['not_enough_money'])
+                                        end
+    
+                                    end, price)
+
+                                else
+                                    ESX.ShowNotification(Locales[Config.Language]['player_is_not_dead'])
+                                end
                             end
                         else
                             ESX.ShowNotification(Locales[Config.Language]['enough_ems'])

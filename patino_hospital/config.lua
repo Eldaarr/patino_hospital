@@ -5,7 +5,8 @@ Config = {}
 ------------------------------------------------------------------------------------------------------ 
 Config.Language = 'en'
 Config.UsingESXLegacy = false -- If you are using ESX Legacy, set this to true and uncomment: '@es_extended/imports.lua' in fxmanifest.lua
-Config.ReviveInvoice = 1500
+Config.ReviveInvoice = 1500 -- Invoice for Revive & Heal
+Config.HealPlayer = true -- Allow player to heal if is not dead
 Config.UseRprogress = true -- Disable if you want to revive instantly https://forum.cfx.re/t/release-standalone-rprogress-customisable-radial-progress-bars/1630655
 Config.EMSJobName = 'ambulance'
 Config.EMSRequired = 3
